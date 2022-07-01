@@ -3,8 +3,8 @@ import './App.css';
 import { Grid } from './components/Grid';
 
 function App() {
-  const [gridRows, setGridRows] = useState(5);
-  const [gridColumns, setGridColumns] = useState(5);
+  const [gridRows, setGridRows] = useState(10);
+  const [gridColumns, setGridColumns] = useState(10);
 
   return (
     <div className="app">

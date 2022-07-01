@@ -8,7 +8,7 @@ interface GridProps {
 }
 
 export function Grid({ origRows, origColumns }: GridProps) {
-  // Even though I pass these from app, it seems that they need to be in the same component as the useEffect which tracks them. Since I wanted the useEffect in this component, I had to recreate the state; not sure if there was a better way.
+  // Even though I pass these from app, it seems that they need to be in the same component as the useEffect which tracks them.
   const [gridRows, setGridRows] = useState(origRows);
   const [gridColumns, setGridColumns] = useState(origColumns);
 
@@ -25,19 +25,19 @@ export function Grid({ origRows, origColumns }: GridProps) {
     document.documentElement.style.setProperty('--gridCols', `${gridColumns}`);
   }, [gridRows, gridColumns]);
 
-  const maxValue = 100;
-  // 100 is my arbitrarity large distance for no distribution centers, but you can set it as anything
-  const initialDistances = Array(gridRows)
+  // Fill grid with higher tha possible value before starting
+  const maxValue = gridRows + gridColumns;
+  const emptyArray = Array(gridRows)
     .fill(gridRows * gridColumns)
     .map((row) => Array(gridColumns).fill(maxValue));
 
-  // Distances for this render
-  let currentDistances = initialDistances;
+  // Get a distance array to narrow down the options
+  let initialDistances = emptyArray;
   grid.forEach((box, index) => {
     if (box === 1) {
-      currentDistances = calculateDistancesFromPoint(
+      initialDistances = calculateDistancesFromPoint(
         index,
-        currentDistances,
+        initialDistances,
         gridRows,
         gridColumns
       );
@@ -62,7 +62,8 @@ export function Grid({ origRows, origColumns }: GridProps) {
           toggleState(index);
         }}
         key={index}
-        distance={currentDistances.flat()[index]}
+        distance={initialDistances.flat()[index]}
+        maxDist={maxValue}
       />
     );
   });
