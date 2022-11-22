@@ -12,7 +12,7 @@ export function calculateDistancesFromPoint(
   // Passed point is always a distribution center (i.e. 'on')
   newDistances[r][c] = 0;
 
-  // Just step through each square (this way is certainly simpler!)
+  // Just step through each square
   for (let i = 0; i < gridRows * gridColumns; i++) {
     const [thisR, thisC] = getCoordFromId(i, gridRows, gridColumns);
 
