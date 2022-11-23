@@ -1,0 +1,246 @@
+* {
+  /* outline: 1px solid slategrey; */
+}
+
+:root {
+  --gridRows: 5;
+  --gridCols: 5;
+
+  --gridSize: calc(75vmin / max(var(--gridRows), var(--gridCols)));
+
+  --violet1: hsl(250, 20.0%, 10.2%);
+  --violet2: hsl(255, 30.3%, 12.9%);
+  --violet3: hsl(253, 37.0%, 18.4%);
+  --violet4: hsl(252, 40.1%, 22.5%);
+  --violet5: hsl(252, 42.2%, 26.2%);
+  --violet6: hsl(251, 44.3%, 31.1%);
+  --violet7: hsl(250, 46.8%, 38.9%);
+  --violet8: hsl(250, 51.8%, 51.2%);
+  --violet9: hsl(252, 56.0%, 57.5%);
+  --violet10: hsl(251, 63.2%, 63.2%);
+  --violet11: hsl(250, 95.0%, 76.8%);
+  --violet12: hsl(252, 87.0%, 96.4%);
+
+  --mauve1: hsl(246, 6.0%, 9.0%);
+  --mauve2: hsl(240, 5.1%, 11.6%);
+  --mauve3: hsl(241, 5.0%, 14.3%);
+  --mauve4: hsl(242, 4.9%, 16.5%);
+  --mauve5: hsl(243, 4.9%, 18.8%);
+  --mauve6: hsl(244, 4.9%, 21.5%);
+  --mauve7: hsl(245, 4.9%, 25.4%);
+  --mauve8: hsl(247, 4.8%, 32.5%);
+  --mauve9: hsl(252, 4.0%, 45.2%);
+  --mauve10: hsl(247, 3.4%, 50.7%);
+  --mauve11: hsl(253, 4.0%, 63.7%);
+  --mauve12: hsl(256, 6.0%, 93.2%);
+
+  --font-responsive: calc(10px + 2vmin);
+
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+
+  --font-heading: 'Open Sans', sans-serif;
+  
+  --font-code: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
+
+
+
+body {
+  background-color: var(--mauve1);
+  margin: 0;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+h1, h2, h3 {
+  color: var(--mauve12);
+  font-family: var(--font-heading)
+}
+
+
+code {
+  font-family: var(--font-code);
+}
+
+code, span {
+  color: var(--mauve11);
+  font-weight: 600;
+}
+
+a {
+  color: var(--violet11);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--violet11);
+  text-decoration: underline;
+}
+
+p {
+  color: var(--mauve12);
+}
+
+.app {
+  color: var(--mauve12);
+  text-align: center;
+
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  gap: 3vh;
+
+  padding-block: 3vh;
+  margin-bottom: 10vh;
+}
+
+.page-title {
+}
+
+.collapse-section {
+  width: 75vmin;
+  border: 2px solid var(--violet7);
+  border-radius: 3px;
+}
+
+.collapse-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: var(--violet3);
+  padding-inline: 1rem;
+}
+
+.collapse-row h2 {
+  font-size: 1.2rem;
+  color: var(--violet11);
+}
+
+.collapse-toggle {
+  padding: .5em .5em;
+  border: none;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.collapse-toggle:active {
+  filter: brightness(1.1);
+}
+
+.collapse-toggle span {
+  color: var(--violet9);
+}
+
+.collapse-toggle:hover span {
+  color: var(--violet10);
+}
+
+.info {
+  font-size: 1.2rem;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+  background-color: var(--mauve3);
+  padding-inline: 1rem;
+  padding-top: 1.5rem;
+  padding-bottom: 2rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+  gap: 2vh;
+}
+
+.grid {
+  display: grid;
+  grid-template-rows: repeat(var(--gridRows), var(--gridSize));
+  grid-template-columns: repeat(var(--gridCols), var(--gridSize));
+  border: 1px solid var(--mauve11);
+}
+
+.box {
+  font-size: var(--font-responsive);
+  background-color: var(--violet1);
+  border: 1px solid var(--violet12);
+  display: grid;
+  place-content: center;
+}
+
+.box[data-dist='0'] {
+  background-color: var(--violet11);
+}
+
+.box[data-dist='1'] {
+  background-color: var(--violet9);
+}
+
+.box[data-dist='2'] {
+  background-color: var(--violet7);
+}
+
+.box[data-dist='3'] {
+  background-color: var(--violet5);
+}
+
+.box[data-dist='4'] {
+  background-color: var(--violet4);
+}
+
+.box[data-dist='5'] {
+  background-color: var(--violet3);
+}
+
+.box[data-dist='6'] {
+  background-color: var(--violet2);
+}
+
+.box[data-state='on'] {
+  position: relative;
+}
+
+.box[data-state='on']::after {
+  content: '';
+  border-radius: 50%;
+  background-color: var(--mauve2);
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  inset: calc(50% - 5px);
+}
+
+
+/* This should become a toggle */
+.dist-label {
+  display: none;
+}
+
+
+
+@media (max-width: 650px) {
+  :root {
+    --gridSize: calc(95vmin / max(var(--gridRows), var(--gridCols)));
+  }
+  
+  .app {
+    padding-inline: 5vw;
+  }
+
+  .collapse-section {
+    width: 95vmin;
+    min-width: fit-content;
+  }
+
+  .container {
+    flex-direction: column;
+  }
+}

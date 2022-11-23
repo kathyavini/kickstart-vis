@@ -3,15 +3,11 @@ import { calculateDistancesFromPoint } from '../utils/calculateDistancesFromPoin
 import { GridBox } from './GridBox';
 
 interface GridProps {
-  origRows: number;
-  origColumns: number;
+  gridRows: number;
+  gridColumns: number;
 }
 
-export function Grid({ origRows, origColumns }: GridProps) {
-  // Even though I pass these from app, it seems that they need to be in the same component as the useEffect which tracks them.
-  const [gridRows, setGridRows] = useState(origRows);
-  const [gridColumns, setGridColumns] = useState(origColumns);
-
+export function Grid({ gridRows, gridColumns }: GridProps) {
   const [grid, setGrid] = useState(
     Array(gridRows)
       .fill(0)
@@ -19,20 +15,15 @@ export function Grid({ origRows, origColumns }: GridProps) {
       .flat()
   );
 
-  // These CSS custom properties dynamically resize the grid
-  useEffect(() => {
-    document.documentElement.style.setProperty('--gridRows', `${gridRows}`);
-    document.documentElement.style.setProperty('--gridCols', `${gridColumns}`);
-  }, [gridRows, gridColumns]);
-
   // Fill grid with higher tha possible value before starting
   const maxValue = gridRows + gridColumns;
-  const emptyArray = Array(gridRows)
+  const maxArray = Array(gridRows)
     .fill(gridRows * gridColumns)
     .map((row) => Array(gridColumns).fill(maxValue));
 
-  // Get a distance array to narrow down the options
-  let initialDistances = emptyArray;
+  let initialDistances = maxArray;
+
+  // Calculate distances from each delivery office
   grid.forEach((box, index) => {
     if (box === 1) {
       initialDistances = calculateDistancesFromPoint(
