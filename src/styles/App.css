@@ -155,10 +155,12 @@ p {
 
 .container {
   display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
+  width: 100%;
+  flex-direction: row;
+  align-items: flex-start;
   justify-content: center;
-  gap: 2vh;
+  row-gap: 2vh;
+  column-gap: 5vw;
 }
 
 .grid {
@@ -218,12 +220,10 @@ p {
   inset: calc(50% - 5px);
 }
 
-
 /* This should become a toggle */
-.dist-label {
+/* .dist-label {
   display: none;
-}
-
+} */
 
 
 @media (max-width: 650px) {
@@ -240,7 +240,11 @@ p {
     min-width: fit-content;
   }
 
+}
+
+@media (max-width: 1024px) {
   .container {
     flex-direction: column;
+    align-items: center;
   }
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { calculateDistancesFromPoint } from '../utils/calculateDistancesFromPoint';
 import { GridBox } from './GridBox';
 
