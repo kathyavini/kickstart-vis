@@ -4,7 +4,6 @@ export function calculateDistancesFromPoint(
   gridRows: number,
   gridColumns: number
 ) {
-  // Values for point of interest
   const [r, c] = getCoordFromId(boxId, gridRows, gridColumns);
 
   let newDistances = distanceArray.map((row) => [...row]);

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { calculateDistancesFromPoint } from '../utils/calculateDistancesFromPoint';
 import { GridBox } from './GridBox';
 
@@ -8,27 +8,28 @@ interface GridProps {
 }
 
 export function Grid({ gridRows, gridColumns }: GridProps) {
-  const [grid, setGrid] = useState(
-    Array(gridRows)
-      .fill(0)
-      .map((x) => Array(gridColumns).fill(0))
-      .flat()
-  );
+  const [grid, setGrid] = useState(Array(gridRows * gridColumns).fill(0));
 
-  // Fill grid with higher tha possible value before starting
+  useEffect(() => {
+    const newGrid: number[] = Array(gridRows * gridColumns).fill(0);
+    newGrid[0] = 1; // just to demo colors
+    setGrid(newGrid);
+  }, [gridRows, gridColumns]);
+
+  // Fill grid with higher than possible value before starting to calculate distances
   const maxValue = gridRows + gridColumns;
-  const maxArray = Array(gridRows)
+  const initialDistances = Array(gridRows)
     .fill(gridRows * gridColumns)
     .map((row) => Array(gridColumns).fill(maxValue));
 
-  let initialDistances = maxArray;
+  let distances = initialDistances;
 
   // Calculate distances from each delivery office
   grid.forEach((box, index) => {
     if (box === 1) {
-      initialDistances = calculateDistancesFromPoint(
+      distances = calculateDistancesFromPoint(
         index,
-        initialDistances,
+        distances,
         gridRows,
         gridColumns
       );
@@ -53,11 +54,22 @@ export function Grid({ gridRows, gridColumns }: GridProps) {
           toggleState(index);
         }}
         key={index}
-        distance={initialDistances.flat()[index]}
+        distance={distances.flat()[index]}
         maxDist={maxValue}
       />
     );
   });
 
-  return <main className="grid">{boxes}</main>;
+  return (
+    <main
+      className="grid"
+      style={
+        {
+          '--gridRows': `${gridRows}`,
+          '--gridCols': `${gridColumns}`,
+        } as React.CSSProperties
+      }>
+      {boxes}
+    </main>
+  );
 }

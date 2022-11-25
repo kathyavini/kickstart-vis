@@ -1,9 +1,3 @@
-.toggle-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
 /* From: https://www.radix-ui.com/docs/primitives/components/switch */
 
 /* reset */
@@ -23,7 +17,7 @@ button {
 }
 
 .SwitchRoot:focus {
-  box-shadow: 0 0 0 2px var(--violet5);
+  box-shadow: 0 0 0 4px var(--violet7);
 }
 .SwitchRoot[data-state='checked'] {
   background-color: var(--violet8);
@@ -47,5 +41,4 @@ button {
 
 .Label {
   user-select: none;
-  width: max-content;
 }

@@ -3,11 +3,6 @@
 }
 
 :root {
-  --gridRows: 5;
-  --gridCols: 5;
-
-  --gridSize: calc(75vmin / max(var(--gridRows), var(--gridCols)));
-
   --violet1: hsl(250, 20.0%, 10.2%);
   --violet2: hsl(255, 30.3%, 12.9%);
   --violet3: hsl(253, 37.0%, 18.4%);
@@ -99,9 +94,6 @@ p {
   margin-bottom: 10vh;
 }
 
-.page-title {
-}
-
 .collapse-section {
   width: 75vmin;
   border: 2px solid var(--violet7);
@@ -128,6 +120,13 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  /* This transition is same as https://www.radix-ui.com/docs/primitives/components/navigation-menu */
+  transition: transform 250ms ease;
+}
+
+.collapse-toggle[data-state="open"]{
+  transform: rotate(-180deg)
 }
 
 .collapse-toggle:active {
@@ -135,6 +134,7 @@ p {
 }
 
 .collapse-toggle span {
+  font-size: 2rem;
   color: var(--violet9);
 }
 
@@ -143,6 +143,7 @@ p {
 }
 
 .info {
+  will-change: transform, opacity;
   font-size: 1.2rem;
   display: flex;
   flex-flow: column nowrap;
@@ -153,17 +154,36 @@ p {
   padding-bottom: 2rem;
 }
 
-.container {
+/* This animation from https://www.radix-ui.com/docs/primitives/components/dropdown-menu 8*/
+@keyframes slideDownAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.collapse-section[data-state='open'] .info {
+  animation: slideDownAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.grid-container {
   display: flex;
   width: 100%;
-  flex-direction: row;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   row-gap: 2vh;
   column-gap: 5vw;
 }
 
 .grid {
+  --gridRows: 0;
+  --gridCols: 10;
+  --gridSize: calc(75vmin / max(var(--gridRows), var(--gridCols)));
   display: grid;
   grid-template-rows: repeat(var(--gridRows), var(--gridSize));
   grid-template-columns: repeat(var(--gridCols), var(--gridSize));
@@ -220,10 +240,46 @@ p {
   inset: calc(50% - 5px);
 }
 
-/* This should become a toggle */
-/* .dist-label {
+.dist-label {
   display: none;
-} */
+}
+/* Toggled in App.tsx */
+.show-values .dist-label {
+  display: block;
+}
+
+.slider-controls {
+  width: 75vmin;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.slider-controls form {
+  width: 100%;
+}
+
+.controls-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.switch-label, .slider-label {
+  text-transform: uppercase;
+  color: var(--mauve11);
+  font-weight: 600;
+}
+
+.switch-label {
+  width: max-content;
+}
+
+.slider-label {
+  width: 35%;
+}
 
 
 @media (max-width: 650px) {
@@ -235,7 +291,7 @@ p {
     padding-inline: 5vw;
   }
 
-  .collapse-section {
+  .collapse-section, .slider-controls {
     width: 95vmin;
     min-width: fit-content;
   }
@@ -243,8 +299,14 @@ p {
 }
 
 @media (max-width: 1024px) {
-  .container {
+  .slider-controls {
+    width: 75vmin;
     flex-direction: column;
-    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+  }
+
+  .slider-controls form {
+    width: 75vmin;
   }
 }

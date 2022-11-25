@@ -1,6 +1,3 @@
-import { useContext } from 'react';
-import { GridContext } from '../App';
-
 interface GridBoxProps {
   state: boolean;
   toggleState: () => void;
@@ -13,18 +10,13 @@ export function GridBox({
   distance,
   maxDist,
 }: GridBoxProps) {
-  const gridContext = useContext(GridContext);
   return (
     <div
       className="box"
       data-state={state ? 'on' : 'off'}
       onClick={toggleState}
       data-dist={distance}>
-      <p
-        className="dist-label"
-        style={
-          gridContext.showValues ? { display: 'block' } : { display: 'none' }
-        }>
+      <p className="dist-label">
         {distance && distance < maxDist ? distance : ''}
       </p>
     </div>

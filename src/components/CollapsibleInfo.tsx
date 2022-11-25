@@ -14,9 +14,7 @@ export const CollapsibleInfo = () => {
         <Collapsible.Trigger asChild>
           <button className="collapse-toggle">
             {' '}
-            <span className="material-icons">
-              {open ? 'expand_less' : 'expand_more'}
-            </span>
+            <span className="material-icons">expand_more</span>
           </button>
         </Collapsible.Trigger>
       </div>

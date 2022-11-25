@@ -1,14 +1,14 @@
 import * as Switch from '@radix-ui/react-switch';
 
-export const ToggleNumeric = ({ setShowValues }: any) => {
+export const NumericToggle = ({ setShowValues }: any) => {
   const handleToggle = (ev: Boolean) => {
     setShowValues(ev);
   };
 
   return (
     <form>
-      <div className="toggle-row">
-        <label className="Label" htmlFor="show-numeric">
+      <div className="controls-row">
+        <label className="Label switch-label" htmlFor="show-numeric">
           Show Numeric Values
         </label>
         <Switch.Root
