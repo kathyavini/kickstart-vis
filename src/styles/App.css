@@ -183,7 +183,7 @@ p {
 .grid {
   --gridRows: 0;
   --gridCols: 10;
-  --gridSize: calc(75vmin / max(var(--gridRows), var(--gridCols)));
+  --gridSize: calc(65vmin / max(var(--gridRows), var(--gridCols)));
   display: grid;
   grid-template-rows: repeat(var(--gridRows), var(--gridSize));
   grid-template-columns: repeat(var(--gridCols), var(--gridSize));
@@ -283,8 +283,8 @@ p {
 
 
 @media (max-width: 650px) {
-  :root {
-    --gridSize: calc(95vmin / max(var(--gridRows), var(--gridCols)));
+  .grid {
+    --gridSize: calc(85vmin / max(var(--gridRows), var(--gridCols)));
   }
   
   .app {

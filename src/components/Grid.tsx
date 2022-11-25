@@ -8,13 +8,11 @@ interface GridProps {
 }
 
 export function Grid({ gridRows, gridColumns }: GridProps) {
-  const [grid, setGrid] = useState(Array(gridRows * gridColumns).fill(0));
-
-  useEffect(() => {
-    const newGrid: number[] = Array(gridRows * gridColumns).fill(0);
+  const [grid, setGrid] = useState(() => {
+    const newGrid = Array(gridRows * gridColumns).fill(0);
     newGrid[0] = 1; // just to demo colors
-    setGrid(newGrid);
-  }, [gridRows, gridColumns]);
+    return newGrid;
+  });
 
   // Fill grid with higher than possible value before starting to calculate distances
   const maxValue = gridRows + gridColumns;
@@ -61,7 +59,7 @@ export function Grid({ gridRows, gridColumns }: GridProps) {
   });
 
   return (
-    <main
+    <div
       className="grid"
       style={
         {
@@ -70,6 +68,6 @@ export function Grid({ gridRows, gridColumns }: GridProps) {
         } as React.CSSProperties
       }>
       {boxes}
-    </main>
+    </div>
   );
 }

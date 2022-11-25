@@ -26,7 +26,11 @@ function App() {
         />
       </div>
       <main className={`grid-container ${showValues ? 'show-values' : ''}`}>
-        <Grid gridRows={gridRows} gridColumns={gridColumns} />
+        <Grid
+          gridRows={gridRows}
+          gridColumns={gridColumns}
+          key={`r${gridRows}c${gridColumns}`}
+        />
         <NumericToggle setShowValues={setShowValues} />
       </main>
     </div>
