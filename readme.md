@@ -1,4 +1,5 @@
 # Kick Start Practice Session #2 - Parcels
+![Screenshot of Parcels Visualizer](parcels.png)
 This is a visual aid I created to understand the last problem in 2022 Google Coding Practice with Kick Start Session #2.
 
 If you're good at competitive coding you probably wouldn't need a visualizer for this problem. However I'm not, and these practice sessions were untimed, so I made one!
